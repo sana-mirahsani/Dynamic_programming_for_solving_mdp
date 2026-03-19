@@ -1,190 +1,183 @@
-# Dynamic programming for solving a Markov decision problem
+# 🚀 Dynamic Programming for Solving a Markov Decision Problem
 
-## Preliminaries:
-### mdp_solver.py
+![Python](https://img.shields.io/badge/Python-3.x-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Status](https://img.shields.io/badge/Status-Active-success.svg)
 
-**This project implements a Markov Decision Process (MDP) framework in Python. It allows you to:**
+## 📌 Description
 
-- Define an MDP with transition and reward matrices.
-- Generate deterministic or stochastic policies.
-- Simulate trajectories using a given policy.
-- Evaluate the total discounted return (G value) of a trajectory.
-- Read MDP data from a text file for generalization.
-- The code is modular, with separate classes and functions for the MDP, policy, and trajectory generation.
-<br>
+Welcome to the **Dynamic Programming for Solving a Markov Decision Problem** repository!
 
-**File Structure:**
+This project provides a complete and modular implementation of a **Markov Decision Process (MDP)** framework in Python. It includes tools for:
 
-- MDP_class : Represents the MDP with states, actions, transition function, reward function, and discount factor.
+* Defining MDP environments
+* Generating deterministic & stochastic policies
+* Simulating trajectories
+* Evaluating policies using multiple approaches
 
-- policy_class : Generates deterministic or stochastic policies.
+👉 Perfect for students and practitioners in:
 
-- trajectory : Simulates a trajectory and computes the total discounted reward.
+* Reinforcement Learning
+* Machine Learning
+* Decision Systems
 
-- read_mdp_file : Reads transition and reward data from a text file.
+---
 
-- normalize_transition_matrix : Ensures transition probabilities sum to 1.
+## 📂 Project Structure
 
-- main_mdp_solver : Main function to run the workflow with user inputs.
+```
+📁 project/
+│
+├── mdp_solver.py
+├── policy_evaluation.py
+├── implementation.py
+├── calculating_optimal_policy.py
+```
 
-<br>
+| File                            | Description                                                                      |
+| ------------------------------- | -------------------------------------------------------------------------------- |
+| `mdp_solver.py`                 | Core MDP framework: states, actions, transitions, rewards, trajectory simulation |
+| `policy_evaluation.py`          | Policy evaluation using Linear Algebra, Bellman Iteration, and Monte Carlo       |
+| `implementation.py`             | Visualization for Taxi Driver & 21 Dice problems                                 |
+| `calculating_optimal_policy.py` | Computes optimal policies and compares methods                                   |
 
-**Features**
+---
 
-1. MDP Class
+## ✨ Features
 
-    - States (S): {e0, e1, ..., e(N-1)}
+### 🔹 MDP Framework
 
-    - Actions (A): {a0, a1, ..., a(M-1)}
+* Define:
 
-    - Transition Function (P): Shape (N, M, N)
+  * States: `S = {e0, ..., eN}`
+  * Actions: `A = {a0, ..., aM}`
+  * Transition matrix `P`
+  * Reward matrix `R`
+  * Discount factor `γ ∈ [0,1]`
+* Supports:
 
-    - Reward Function (R): Shape (N, M, N)
+  * ✅ Deterministic policies
+  * ✅ Stochastic policies
+* Trajectory simulation:
 
-    - Discount Factor (γ): Must be in [0,1]
+  * Policy-based action selection
+  * Probabilistic state transitions
+  * Discounted reward computation
 
-2. Policy Class
+---
 
-    - Supports deterministic or stochastic policies.
+### 🔹 Policy Evaluation Methods
 
-    - Deterministic: Each state maps to a single action.
+#### 📐 Linear Algebra
 
-    - Stochastic: Each state maps to a probability distribution over actions.
+* Exact solution using matrix operations
+* Solves:
 
-3. Trajectory Generation
+```
+(I − γPπ)V = Rπ
+```
 
-    - Simulates a trajectory starting from a given state.
+#### 🔁 Bellman Iteration
 
-    - Chooses actions according to the policy.
+* Iterative convergence method
+* Controlled via tolerance parameter
 
-    - Samples next states using the transition function.
+#### 🎲 Monte Carlo Estimation
 
-    - Accumulates discounted rewards.
+* Simulation-based approach
+* Uses multiple trajectories to estimate value
 
-4. Reading MDP from File
+---
 
-    - Reads a text file containing:
+### 🔹 Experiments & Applications
 
-    - Transition probabilities
+* 🚕 Taxi Driver Problem
+* 🎲 21 Dice Problem
+* 📊 Visualization of results
+* 🔍 Comparison of evaluation methods
+* 📉 Impact analysis of discount factor (γ)
 
-    - Reward values
+---
 
-    - File format:
+## ⚙️ Requirements
 
-        - First block: transition probabilities (shape N x M x N)
+* Python 3.x
+* NumPy
+* Matplotlib
 
-        - Second block: reward values (shape N x M x N)
+Install dependencies:
 
-5. Main Workflow
+```bash
+pip install numpy matplotlib
+```
 
-    - Load transition and reward matrices from a file.
+---
 
-    - Create an MDP_class object.
+## ▶️ How to Use
 
-    - Generate a policy (deterministic or stochastic).
+### 1. Clone the repository
 
-    - Generate a trajectory from a start state.
+```bash
+git clone https://github.com/sana-mirahsani/dynamic-programming-mdp.git
+cd dynamic-programming-mdp
+```
 
-    - Compute and print the total discounted reward.
+### 2. Run scripts
 
-### policy_evaluation.py
+#### 🔹 MDP Simulation
 
-- Overview
+```bash
+python mdp_solver.py
+```
 
-    - This project implements policy evaluation for a given MDP using three different methods:
+#### 🔹 Policy Evaluation
 
-    - Linear Algebra – exact evaluation using matrix operations.
+```bash
+python policy_evaluation.py
+```
 
-    - Bellman Iteration – iterative solution of the Bellman equations until convergence.
+#### 🔹 Visualization
 
-    - Monte Carlo Value Estimation – approximate evaluation using sampled trajectories.
+```bash
+python implementation.py
+```
 
-    - It builds on the MDP and policy classes from mdp_solver.py and supports both deterministic and stochastic policies.
+#### 🔹 Optimal Policy
 
+```bash
+python calculating_optimal_policy.py
+```
 
-- File Structure
+---
 
-    - linear_algebra – Compute the value function 
-    V exactly by solving 
-    (
-    𝐼
-    −
-    𝛾
-    𝑃
-    𝜋
-    )
-    𝑉
-    =
-    𝑅
-    𝜋
-    (I−γP
-    π
-    )V=R
-    π
-    .
+## 📊 Example Output
 
-    - bellman_iteration – Iteratively update the value function using the Bellman equation until convergence.
+* Value function plots
+* Policy comparisons
+* Convergence curves
+* Discount factor impact graphs
 
-    - monte_carlo_value – Generate multiple trajectories from a start state and estimate the expected return.
+---
 
-- main_policy_evaluation – Main workflow that takes user input and evaluates the policy using all three methods.
+## 📜 License
 
-**Features**
+This project is licensed under the **MIT License**.
 
-1. Linear Algebra
+---
 
-    Uses matrix inversion to solve for the exact value function of a given policy.
+## 👩‍💻 Author
 
-    Supports deterministic and stochastic policies.
+**Sana Mirahsani**
+📧 [s.mirahsani1998@gmail.com](mailto:s.mirahsani1998@gmail.com)
+🔗 LinkedIn: sana-mirahsani
+💻 GitHub: sana-mirahsani
 
-    Returns a 1D vector of state values.
+---
 
-2. Bellman Iteration
+## ⭐ Support
 
-    Iteratively updates 
-    V(s) until convergence.
+If you find this project useful:
 
-    Uses a tolerance parameter tol to stop iterations.
-
-    Returns:
-
-    V_new: Value function after convergence
-
-    n_iter: Number of iterations
-
-3. Monte Carlo Value
-
-    Generates n_trajectories from a specified start state.
-
-    Computes the average discounted return.
-
-    Useful for stochastic simulations or when P and R are unknown.
-
-**Main Workflow**
-
-    Read MDP data from a text file (read_mdp_file) with transition and reward matrices.
-
-    Create MDP object using MDP_class.
-
-    Generate a policy using policy_class (deterministic or stochastic).
-
-    Evaluate the policy using all three methods:
-
-    Linear Algebra
-
-    Bellman Iteration
-
-    Monte Carlo
-
-    Print results for comparison.
-
-## policy evaluation
-### implementation.py
-
-Simply just run the script it shows you the plotting result for taxi driver problem with all deterministic policies
-and also the 21 dice problem.
-
-## Calculating an optimal policy
-### calculating_optimal_policy.py
-Run this script and it shows you the results of all three method calculation the optimal policy for both taxi driver and
-21 dice roll problem, all with the influence of y for both problem with plotting the result.
+* ⭐ Star the repo
+* 🍴 Fork it
+* 🧠 Use it in your ML projects
